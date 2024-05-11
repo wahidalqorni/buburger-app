@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             // baris ke-1
             Container(
-              margin: EdgeInsets.only(left: 20, top: MediaQuery.of(context).size.height * 0.10),
+              margin: EdgeInsets.only(left: 20, top: MediaQuery.of(context).size.height * 0.05),
               child: Row(
                 children: [
                   Image.asset("assets/image1.png"),
@@ -63,17 +63,12 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
     
-            
+            Spacer(),
             // baris ke-3
-            Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.06,
-              ),
-              child: Image.asset(
-                "assets/img-splash.png",
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+            Image.asset(
+              "assets/img-splash.png",
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
           ],
         ),
