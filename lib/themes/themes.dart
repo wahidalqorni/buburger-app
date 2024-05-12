@@ -12,6 +12,7 @@ Color greenColor = Color(0XFF26FF22);
 Color redColor = Color(0XFFD23030);
 Color whiteColor = Color(0XFFFFFFFF);
 Color bgColor = Color(0XFFFF4F3EF);
+Color borderColor = Color(0XFFFCDCDCD);
 
 // text
 TextStyle primaryTextstyle = GoogleFonts.outfit(

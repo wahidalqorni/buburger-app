@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:buburger_app/pages/login_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +13,23 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
+
+  // memanggil function ap yg akan dijalankan saat halaman ini dipanggil
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    movingPage();
+  }
+
+  //fungsi setelah 2 detik akan berpindah halaman  
+  void movingPage() {
+    Timer(Duration(seconds: 2), () {
+      // masukkan fungsi navigation
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    });
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -19,7 +39,8 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             // baris ke-1
             Container(
-              margin: EdgeInsets.only(left: 20, top: MediaQuery.of(context).size.height * 0.05),
+              margin: EdgeInsets.only(
+                  left: 20, top: MediaQuery.of(context).size.height * 0.05),
               child: Row(
                 children: [
                   Image.asset("assets/image1.png"),
@@ -62,7 +83,7 @@ class _SplashPageState extends State<SplashPage> {
                 ],
               ),
             ),
-    
+
             Spacer(),
             // baris ke-3
             Image.asset(

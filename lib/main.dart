@@ -1,3 +1,5 @@
+import 'package:buburger_app/pages/daftar_page.dart';
+import 'package:buburger_app/pages/login_page.dart';
 import 'package:buburger_app/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
