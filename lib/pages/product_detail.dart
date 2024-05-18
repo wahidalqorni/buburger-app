@@ -2,7 +2,9 @@ import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
+  ProductDetail({super.key, required this.nama, required this.imageUrl, required this.harga });
+
+  String nama, imageUrl, harga;
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -36,7 +38,7 @@ class _ProductDetailState extends State<ProductDetail> {
         child: ListView(
           children: [
             Image.asset(
-              "assets/burger1.png",
+              widget.imageUrl,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -50,11 +52,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Beef Burger",
+                      widget.nama,
                       style: blackTextstyle,
                     ),
                     Text(
-                      "IDR 20.000",
+                      widget.harga,
                       style: greyTextstyle,
                     ),
                   ],

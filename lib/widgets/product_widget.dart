@@ -12,7 +12,11 @@ class ProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (builder) => ProductDetail() ));
+        Navigator.push(context, MaterialPageRoute(builder: (builder) => ProductDetail(
+          nama: nama,
+          imageUrl: imageUrl,
+          harga: harga,
+        ) ));
       },
       child: Container(
         decoration: BoxDecoration(
