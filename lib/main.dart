@@ -1,4 +1,5 @@
 import 'package:buburger_app/pages/daftar_page.dart';
+import 'package:buburger_app/pages/landing_page.dart';
 import 'package:buburger_app/pages/login_page.dart';
 import 'package:buburger_app/pages/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Buburger App',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SplashPage(),
+      home: LandingPage(),
     );
   }
 }

@@ -170,7 +170,7 @@ class DaftarPage extends StatelessWidget {
 
             // belum punya akun? ....
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
