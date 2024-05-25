@@ -53,11 +53,16 @@ class _ProductDetailState extends State<ProductDetail> {
                   children: [
                     Text(
                       widget.nama,
-                      style: blackTextstyle,
+                      style: blackTextstyle.copyWith(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     Text(
                       widget.harga,
-                      style: greyTextstyle,
+                      style: greyTextstyle.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ],
                 ),
@@ -85,8 +90,27 @@ class _ProductDetailState extends State<ProductDetail> {
               ],
             ),
             // Detail
-
+             SizedBox(
+              height: 20,
+            ),
+            Text("Detail", style: blackTextstyle.copyWith(
+              fontWeight: FontWeight.w600,
+            ), ) ,
+            Text("Burger daging yang rendah lemak, dilengkapi dengan keju,seledri, dan potongan bawang bombai yang lezat.", style: greyTextstyle.copyWith(
+              fontWeight: FontWeight.w600,
+            ), ) ,
+            
             // Komposisi
+             SizedBox(
+              height: 20,
+            ),
+            Text("Komposisi", style: blackTextstyle.copyWith(
+              fontWeight: FontWeight.w600,
+            ), ) ,
+            Text("Roti, seledri, wijen, bawang bombai, daging sapi, keju..", style: greyTextstyle.copyWith(
+              fontWeight: FontWeight.w600,
+            ), ) ,
+
           ],
         ),
       ),
