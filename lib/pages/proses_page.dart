@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:buburger_app/pages/home_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,11 @@ class ProsesPage extends StatelessWidget {
             SizedBox(
               height: 23,
             ),
-            Center(child: Text("Kembali ke Beranda", style: secodaryTextstyle, )),
+            InkWell(
+              onTap: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage() ));
+              },
+              child: Center(child: Text("Kembali ke Beranda", style: secodaryTextstyle, ))),
           ],
         ),
       ),

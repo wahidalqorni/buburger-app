@@ -134,7 +134,7 @@ class LandingPage extends StatelessWidget {
                     imageUrl: "assets/burger2.png",
                     harga: "IDR 15.000",
                   ),
-                ProductWidget(
+                  ProductWidget(
                     nama: "Union Burger",
                     imageUrl: "assets/burger3.png",
                     harga: "IDR 10.000",
