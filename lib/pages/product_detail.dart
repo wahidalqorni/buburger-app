@@ -1,8 +1,13 @@
+import 'package:buburger_app/pages/order_now_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetail extends StatefulWidget {
-  ProductDetail({super.key, required this.nama, required this.imageUrl, required this.harga });
+  ProductDetail(
+      {super.key,
+      required this.nama,
+      required this.imageUrl,
+      required this.harga});
 
   String nama, imageUrl, harga;
 
@@ -12,6 +17,28 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   @override
+
+  // variabel jumlah
+  int jumlah = 1;
+
+  // fungsi menambah
+  void increment() {
+    setState(() {
+      jumlah++;
+    });
+  }
+
+  // fungsi mengurang
+  void decrement() {
+    setState(() {
+
+      if (jumlah > 1) {
+        jumlah--;
+      }
+      
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
@@ -68,49 +95,70 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
                 Row(
                   children: [
-                    Image.asset(
-                      "assets/ic-kurang.png",
-                      width: 24,
-                      height: 24,
+                    InkWell(
+                      onTap: () {
+                        decrement();
+                      },
+                      child: Image.asset(
+                        "assets/ic-kurang.png",
+                        width: 24,
+                        height: 24,
+                      ),
                     ),
                     SizedBox(
                       width: 15,
                     ),
-                    Text("1"),
+                    Text(jumlah.toString()),
                     SizedBox(
                       width: 15,
                     ),
-                    Image.asset(
-                      "assets/ic-tambah.png",
-                      width: 24,
-                      height: 24,
+                    InkWell(
+                      onTap: () {
+                        increment();
+                      },
+                      child: Image.asset(
+                        "assets/ic-tambah.png",
+                        width: 24,
+                        height: 24,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
             // Detail
-             SizedBox(
+            SizedBox(
               height: 20,
             ),
-            Text("Detail", style: blackTextstyle.copyWith(
-              fontWeight: FontWeight.w600,
-            ), ) ,
-            Text("Burger daging yang rendah lemak, dilengkapi dengan keju,seledri, dan potongan bawang bombai yang lezat.", style: greyTextstyle.copyWith(
-              fontWeight: FontWeight.w600,
-            ), ) ,
-            
-            // Komposisi
-             SizedBox(
-              height: 20,
+            Text(
+              "Detail",
+              style: blackTextstyle.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            Text("Komposisi", style: blackTextstyle.copyWith(
-              fontWeight: FontWeight.w600,
-            ), ) ,
-            Text("Roti, seledri, wijen, bawang bombai, daging sapi, keju..", style: greyTextstyle.copyWith(
-              fontWeight: FontWeight.w600,
-            ), ) ,
+            Text(
+              "Burger daging yang rendah lemak, dilengkapi dengan keju,seledri, dan potongan bawang bombai yang lezat.",
+              style: greyTextstyle.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
 
+            // Komposisi
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Komposisi",
+              style: blackTextstyle.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              "Roti, seledri, wijen, bawang bombai, daging sapi, keju..",
+              style: greyTextstyle.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
@@ -145,14 +193,23 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
 
             // Pesan Sekarang
-            Container(
-              width: 150,
-              height: 42,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: redColor, width: 2 ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderNowPage(nama: widget.nama, imageUrl: widget.imageUrl, harga: widget.harga, qty: jumlah.toString()) ));
+              },
+              child: Container(
+                width: 150,
+                height: 42,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: redColor, width: 2),
+                ),
+                child: Center(
+                    child: Text(
+                  "Pesan Sekarang",
+                  style: secodaryTextstyle,
+                )),
               ),
-              child: Center(child: Text("Pesan Sekarang", style: secodaryTextstyle,)),
             ),
           ],
         ),
