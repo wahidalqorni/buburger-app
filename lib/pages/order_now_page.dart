@@ -227,8 +227,37 @@ class _OrderNowPageState extends State<OrderNowPage> {
               ),
             ),
           ),
+          SizedBox(height: 20,),
         ],
       ),
+
+    bottomNavigationBar: Container(
+        width: double.infinity,
+        height: 80,
+        color: whiteColor,
+        child: Container(
+          height: 30,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextButton(
+              style: TextButton.styleFrom(backgroundColor: primaryColor),
+              onPressed: null,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 5,
+                  bottom: 5,
+                  left: 19,
+                  right: 19,
+                ),
+                child: Text(
+                  "Konfirmasi",
+                  style: blackTextstyle,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),  
     );
   }
 }
