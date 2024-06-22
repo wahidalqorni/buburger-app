@@ -2,6 +2,8 @@ import 'package:buburger_app/pages/order_detail_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
+import '../config/config.dart';
+
 class OrderWidget extends StatelessWidget {
   OrderWidget({super.key, required this.nama, required this.harga, required this.imageUrl, required this.qty, required this.status });
 
@@ -39,7 +41,7 @@ class OrderWidget extends StatelessWidget {
                 Text(nama, style: blackTextstyle.copyWith(
                   fontWeight: FontWeight.w600,
                 ), ),
-                Text(harga, style: greyTextstyle, ),
+                Text(Config.convertToIdr(int.parse(harga),0), style: greyTextstyle, ),
                 Text("Qty : ${qty}", style: greyTextstyle, ),
                 Text(status, style: status == "Diproses" ?  primaryTextstyle.copyWith(
                   fontWeight: FontWeight.w600,

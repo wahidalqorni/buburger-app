@@ -1,5 +1,8 @@
+import 'package:buburger_app/pages/checkout_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+
+import '../config/config.dart';
 
 class OrderNowPage extends StatefulWidget {
   const OrderNowPage(
@@ -19,6 +22,11 @@ class _OrderNowPageState extends State<OrderNowPage> {
 
   // variabel pilihan default metode pembayaran
   String metodePembayaran = "Cash On Delivery (COD)";
+
+  // variabel untuk mengirimkan nilai (menggunakan inputan (TextEditingController) )
+  TextEditingController namaLengkap = TextEditingController();
+  TextEditingController nohp = TextEditingController();
+  TextEditingController alamat = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +79,7 @@ class _OrderNowPageState extends State<OrderNowPage> {
                       ),
                     ),
                     Text(
-                      widget.harga,
+                      Config.convertToIdr(int.parse(widget.harga),0),
                       style: greyTextstyle,
                     ),
                     Text(
@@ -107,6 +115,7 @@ class _OrderNowPageState extends State<OrderNowPage> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: namaLengkap,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -134,6 +143,7 @@ class _OrderNowPageState extends State<OrderNowPage> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: nohp,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -161,6 +171,7 @@ class _OrderNowPageState extends State<OrderNowPage> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: alamat,
                     keyboardType:TextInputType.multiline,
                     minLines: 6,
                     maxLines: 6,
@@ -241,7 +252,9 @@ class _OrderNowPageState extends State<OrderNowPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: primaryColor),
-              onPressed: null,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutPage(namaLengkap: namaLengkap.text, nohp: nohp.text, alamat: alamat.text, metodePembayaran: metodePembayaran, nama: widget.nama, harga: widget.harga, qty: widget.qty, imageUrl: widget.imageUrl) ));
+              },
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: 5,

@@ -2,6 +2,8 @@ import 'package:buburger_app/pages/order_now_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
+import '../config/config.dart';
+
 class ProductDetail extends StatefulWidget {
   ProductDetail(
       {super.key,
@@ -86,7 +88,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                     ),
                     Text(
-                      widget.harga,
+                      Config.convertToIdr(int.parse(widget.harga), 0 ),
                       style: greyTextstyle.copyWith(
                         fontWeight: FontWeight.w400,
                       ),

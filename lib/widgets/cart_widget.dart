@@ -1,6 +1,8 @@
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
+import '../config/config.dart';
+
 class CartWidget extends StatefulWidget {
   CartWidget({super.key, required this.nama, required this.harga, required this.qty, required this.imageUrl});
 
@@ -42,7 +44,7 @@ class _CartWidgetState extends State<CartWidget> {
                 ),
               ),
               Text(
-                widget.harga,
+                Config.convertToIdr(int.parse(widget.harga),0),
                 style: greyTextstyle,
               ),
               Row(

@@ -27,7 +27,7 @@ class OrderPage extends StatelessWidget {
             OrderWidget(
               nama: "Beef Burger",
               imageUrl: "assets/burger1.png",
-              harga: "IDR 20.000",
+              harga: "20000",
               qty: "1",
               status: "Diproses",
             ),
@@ -35,7 +35,7 @@ class OrderPage extends StatelessWidget {
              OrderWidget(
               nama: "Regular Burger",
               imageUrl: "assets/burger2.png",
-              harga: "IDR 15.000",
+              harga: "15000",
               qty: "1",
               status: "Selesai",
             ),

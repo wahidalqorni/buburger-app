@@ -127,22 +127,22 @@ class LandingPage extends StatelessWidget {
                   ProductWidget(
                     nama: "Beef Burger",
                     imageUrl: "assets/burger1.png",
-                    harga: "IDR 20.000",
+                    harga: "20000",
                   ),
                   ProductWidget(
                     nama: "Steak Burger",
                     imageUrl: "assets/burger2.png",
-                    harga: "IDR 15.000",
+                    harga: "15000",
                   ),
                   ProductWidget(
                     nama: "Union Burger",
                     imageUrl: "assets/burger3.png",
-                    harga: "IDR 10.000",
+                    harga: "10000",
                   ),
                   ProductWidget(
                     nama: "Regular Burger",
                     imageUrl: "assets/burger4.png",
-                    harga: "IDR 5.000",
+                    harga: "5000",
                   ),
                 ],
               ),
