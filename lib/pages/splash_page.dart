@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:buburger_app/pages/home_page.dart';
 import 'package:buburger_app/pages/login_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sp_util/sp_util.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -25,8 +28,13 @@ class _SplashPageState extends State<SplashPage> {
   void movingPage() {
     Timer(Duration(seconds: 2), () {
       // masukkan fungsi navigation
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => LoginPage()));
+
+      // jika data SpUtil nama_user == "" maka arahkan ke hamalan login : arahkan ke homepage
+      SpUtil.getString("email_user") == "" ? Get.off(LoginPage()) : Get.off(HomePage());
+       
+
     });
   }
 

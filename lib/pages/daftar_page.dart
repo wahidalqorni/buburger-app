@@ -1,12 +1,17 @@
+import 'package:buburger_app/controllers/auth_controller.dart';
 import 'package:buburger_app/pages/login_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DaftarPage extends StatelessWidget {
   const DaftarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final authC = Get.put(AuthController());
+
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(
@@ -46,6 +51,7 @@ class DaftarPage extends StatelessWidget {
               height: 10,
             ),
             TextFormField(
+              controller: authC.name,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -73,6 +79,7 @@ class DaftarPage extends StatelessWidget {
               height: 10,
             ),
             TextFormField(
+              controller: authC.email,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -101,6 +108,7 @@ class DaftarPage extends StatelessWidget {
               height: 10,
             ),
             TextFormField(
+              controller: authC.telepon,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -129,6 +137,7 @@ class DaftarPage extends StatelessWidget {
               height: 10,
             ),
             TextFormField(
+              controller: authC.password,
               obscureText: true,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
@@ -160,7 +169,9 @@ class DaftarPage extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: primaryColor,
                 ),
-                onPressed: null,
+                onPressed: (){
+                  authC.register();
+                },
                 child: Text(
                   "Buat Akun",
                   style: blackTextstyle,
