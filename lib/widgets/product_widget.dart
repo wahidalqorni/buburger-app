@@ -5,7 +5,7 @@ import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class ProductWidget extends StatelessWidget {
-  ProductWidget({super.key, required this.dataProduct });
+  ProductWidget({super.key, required this.dataProduct});
 
   // buat variabel untuk menerima data (panggil ProductModel)
   final ProductModel dataProduct;
@@ -14,7 +14,12 @@ class ProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (builder) => ProductDetail(dataProduct: dataProduct,) ));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (builder) => ProductDetail(
+                      dataProduct: dataProduct,
+                    )));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -24,23 +29,31 @@ class ProductWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
-            Image.network(dataProduct.gambar, fit: BoxFit.cover, ),
-    
+            Container(
+              width: double.infinity,
+              child: Image.network(
+                dataProduct.gambar,
+                width: 120,
+                height: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 13),
-              child: Text(dataProduct.namaProduct, style: blackTextstyle.copyWith(
-                fontWeight: FontWeight.w600,
-              ), 
+              child: Text(
+                dataProduct.namaProduct,
+                style: blackTextstyle.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-    
-             Padding(
-               padding: const EdgeInsets.only(left: 13),
-               child: Text(Config.convertToIdr(int.parse(dataProduct.harga), 0), style: greyTextstyle ),
-             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 13),
+              child: Text(Config.convertToIdr(int.parse(dataProduct.harga), 0),
+                  style: greyTextstyle),
+            ),
           ],
         ),
       ),
