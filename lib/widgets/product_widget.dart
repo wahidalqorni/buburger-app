@@ -1,23 +1,20 @@
 import 'package:buburger_app/config/config.dart';
+import 'package:buburger_app/models/Product_model.dart';
 import 'package:buburger_app/pages/product_detail.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class ProductWidget extends StatelessWidget {
-  ProductWidget({super.key, required this.nama, required this.imageUrl, required this.harga });
+  ProductWidget({super.key, required this.dataProduct });
 
-  // buat variabel untuk menerima data
-  String nama, imageUrl, harga;
+  // buat variabel untuk menerima data (panggil ProductModel)
+  final ProductModel dataProduct;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (builder) => ProductDetail(
-          nama: nama,
-          imageUrl: imageUrl,
-          harga: harga,
-        ) ));
+        Navigator.push(context, MaterialPageRoute(builder: (builder) => ProductDetail(dataProduct: dataProduct,) ));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -27,18 +24,22 @@ class ProductWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(imageUrl, fit: BoxFit.cover, ),
+            
+            Image.network(dataProduct.gambar, fit: BoxFit.cover, ),
     
             Padding(
               padding: const EdgeInsets.only(left: 13),
-              child: Text(nama, style: blackTextstyle.copyWith(
+              child: Text(dataProduct.namaProduct, style: blackTextstyle.copyWith(
                 fontWeight: FontWeight.w600,
-              ), ),
+              ), 
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
     
              Padding(
                padding: const EdgeInsets.only(left: 13),
-               child: Text(Config.convertToIdr(int.parse(harga), 0), style: greyTextstyle ),
+               child: Text(Config.convertToIdr(int.parse(dataProduct.harga), 0), style: greyTextstyle ),
              ),
           ],
         ),

@@ -1,3 +1,5 @@
+import 'package:buburger_app/models/Product_model.dart';
+import 'package:buburger_app/services/product_services.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:buburger_app/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
@@ -113,39 +115,46 @@ class LandingPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            // list product
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                crossAxisSpacing: 12,
-                childAspectRatio: 5 / 7,
-                mainAxisSpacing: 12,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  ProductWidget(
-                    nama: "Beef Burger",
-                    imageUrl: "assets/burger1.png",
-                    harga: "20000",
-                  ),
-                  ProductWidget(
-                    nama: "Steak Burger",
-                    imageUrl: "assets/burger2.png",
-                    harga: "15000",
-                  ),
-                  ProductWidget(
-                    nama: "Union Burger",
-                    imageUrl: "assets/burger3.png",
-                    harga: "10000",
-                  ),
-                  ProductWidget(
-                    nama: "Regular Burger",
-                    imageUrl: "assets/burger4.png",
-                    harga: "5000",
-                  ),
-                ],
-              ),
+
+            // loading data menggunakan widget FutureBuilder
+            FutureBuilder<List<ProductModel>>(
+              // untuk memanggil data
+              future: ProductServices.getProductList(),
+              builder: (context, snapshot) {
+                // saat loading...
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // tampilkan widget CircularProgressIndicator
+                  return Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
+                    ),
+                  );
+                }
+                // setelah data didapatkan
+                else if (snapshot.hasData) {
+                  return // list product
+                      Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      shrinkWrap: true,
+                      crossAxisSpacing: 12,
+                      childAspectRatio: 5 / 7,
+                      mainAxisSpacing: 12,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ...snapshot.data!.map((data) { 
+                          return ProductWidget(dataProduct: data);
+                        })
+                      ],
+                    ),
+                  );
+                }
+                // defautl agar future builder bisa berfungsi
+                return Container();
+              },
             ),
           ],
         ),

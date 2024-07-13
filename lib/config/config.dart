@@ -5,7 +5,7 @@ class Config {
   // sediakan variabel penampung alamat url web service
   static String urlAPI = "https://syntop.airportslab.com/api";
   // sedaiakan variabel penampung alamat url main website (digunakan untuk ambil path file/gambar dr backend)
-  static String urlMain = "https://syntop.airportslab.com";
+  static String urlMain = "https://syntop.airportslab.com/";
 
   // variabel end point yg akan dipakai
   // login, register, logout

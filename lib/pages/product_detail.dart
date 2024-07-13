@@ -1,17 +1,15 @@
+import 'package:buburger_app/models/Product_model.dart';
 import 'package:buburger_app/pages/order_now_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import '../config/config.dart';
 
 class ProductDetail extends StatefulWidget {
-  ProductDetail(
-      {super.key,
-      required this.nama,
-      required this.imageUrl,
-      required this.harga});
+  ProductDetail({super.key, required this.dataProduct});
 
-  String nama, imageUrl, harga;
+  final ProductModel dataProduct;
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -66,8 +64,8 @@ class _ProductDetailState extends State<ProductDetail> {
         margin: EdgeInsets.only(left: 20, right: 20),
         child: ListView(
           children: [
-            Image.asset(
-              widget.imageUrl,
+            Image.network(
+              widget.dataProduct.gambar,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -80,15 +78,18 @@ class _ProductDetailState extends State<ProductDetail> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.nama,
-                      style: blackTextstyle.copyWith(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Text(
+                        widget.dataProduct.namaProduct,
+                        style: blackTextstyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     Text(
-                      Config.convertToIdr(int.parse(widget.harga), 0 ),
+                      Config.convertToIdr(int.parse(widget.dataProduct.harga), 0 ),
                       style: greyTextstyle.copyWith(
                         fontWeight: FontWeight.w400,
                       ),
@@ -138,12 +139,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              "Burger daging yang rendah lemak, dilengkapi dengan keju,seledri, dan potongan bawang bombai yang lezat.",
-              style: greyTextstyle.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+
+            HtmlWidget(widget.dataProduct.spesifikasi),
 
             // Komposisi
             SizedBox(
@@ -197,7 +194,7 @@ class _ProductDetailState extends State<ProductDetail> {
             // Pesan Sekarang
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderNowPage(nama: widget.nama, imageUrl: widget.imageUrl, harga: widget.harga, qty: jumlah.toString()) ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderNowPage(nama: widget.dataProduct.namaProduct, imageUrl: widget.dataProduct.gambar, harga: widget.dataProduct.harga, qty: jumlah.toString()) ));
               },
               child: Container(
                 width: 150,
