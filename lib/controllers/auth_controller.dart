@@ -14,8 +14,8 @@ class AuthController extends GetxController {
 
   // siapkan variabel inputan utk login/register
   TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  TextEditingController email = TextEditingController(text: SpUtil.getString("email") == "" ? "" : SpUtil.getString("email"));
+  TextEditingController password = TextEditingController(text: SpUtil.getString("password") == "" ? "" : SpUtil.getString("password") );
   TextEditingController telepon = TextEditingController();
 
 
@@ -32,6 +32,8 @@ class AuthController extends GetxController {
         'password' : password.text,
       } );
 
+      SpUtil.putString("password", password.text);
+      SpUtil.putString("email", email.text);
       //print hasil dari variabel response di atas
       print(response.body); 
 
@@ -78,6 +80,9 @@ class AuthController extends GetxController {
         'telepon' : telepon.text,
       } );
 
+      SpUtil.putString("password", password.text);
+      SpUtil.putString("email", email.text);
+
       //print hasil dari variabel response di atas
       print(response.body); 
 
@@ -117,8 +122,14 @@ class AuthController extends GetxController {
       final response = await http.get(url);
       var responseDecode = json.decode(response.body);
       if(response.statusCode == 200){
-        // hapus SpUtil yg tersimpan d hp
-        SpUtil.clear();
+        // hapus seluruh data yg tersimpan di SpUtil yg tersimpan d hp
+        // SpUtil.clear();
+
+        // menghapus satu2 data yg disimpan SpUtil
+        SpUtil.remove("id_user");
+        SpUtil.remove("nama_user");
+        SpUtil.remove("email_user");
+        SpUtil.remove("telepon_user");
         // alert
         Get.snackbar("Success", responseDecode["message"], backgroundColor: greenColor, colorText: whiteColor, snackPosition: SnackPosition.TOP, margin: EdgeInsets.all(10)  );
 
