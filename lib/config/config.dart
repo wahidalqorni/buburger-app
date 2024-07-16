@@ -21,7 +21,7 @@ class Config {
 
   // keranjang
   String urlKeranjangPost = "$urlAPI/keranjang-post";
-  String urlKeranjangList = "$urlAPI/keranjang-list";
+  String urlKeranjangList = "$urlAPI/keranjang-list?user_id=";
   String urlKeranjangDelete = "$urlAPI/keranjang-delete";
 
   // checkout

@@ -1,3 +1,6 @@
+import 'package:buburger_app/config/config.dart';
+import 'package:buburger_app/models/Cart_model.dart';
+import 'package:buburger_app/services/cart_services.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:buburger_app/widgets/cart_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,25 +28,36 @@ class CartPage extends StatelessWidget {
               ),
             ),
 
-            // widget cart
-            CartWidget(
-              nama: "Beef Burger",
-              harga: "20000",
-              imageUrl: "assets/burger1.png",
-              qty: "1",
-            ),
-            CartWidget(
-              nama: "Onion Burger",
-              harga: "23000",
-              imageUrl: "assets/burger3.png",
-              qty: "1",
-            ),
-            CartWidget(
-              nama: "Steak Burger",
-              harga: "20000",
-              imageUrl: "assets/burger2.png",
-              qty: "1",
-            ),
+            FutureBuilder<List<CartModel>>(
+              future: CartServices.getCartList(),
+              builder: (context, snapshot) {
+
+                // saat loading...
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // tampilkan widget CircularProgressIndicator
+                  return Container(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasData) {
+                  return Column(
+                    children: [
+                       ...snapshot.data!.map((data) { 
+                          return CartWidget(dataCart: data,);
+                        })
+                    ],
+                  );
+                }
+
+                // defautl agar future builder bisa berfungsi
+                return Container();
+              },
+              
+              ),
+
           ],
         ),
       ),
