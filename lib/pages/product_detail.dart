@@ -1,3 +1,4 @@
+import 'package:buburger_app/controllers/cart_controller.dart';
 import 'package:buburger_app/models/Product_model.dart';
 import 'package:buburger_app/pages/order_now_page.dart';
 import 'package:buburger_app/themes/themes.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import '../config/config.dart';
+import 'package:get/get.dart';
 
 class ProductDetail extends StatefulWidget {
   ProductDetail({super.key, required this.dataProduct});
@@ -40,6 +42,10 @@ class _ProductDetailState extends State<ProductDetail> {
   }
 
   Widget build(BuildContext context) {
+
+      // panggil CartController (jgn lupa import terlebih dahulu get.dart )
+      final cartC = Get.put(CartController());
+
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -175,7 +181,9 @@ class _ProductDetailState extends State<ProductDetail> {
               height: 42,
               child: TextButton(
                 style: TextButton.styleFrom(backgroundColor: primaryColor),
-                onPressed: null,
+                onPressed: (){
+                  cartC.postCart(widget.dataProduct.id.toString(), jumlah.toString());
+                },
                 child: Padding(
                   padding: const EdgeInsets.only(
                     top: 5,
