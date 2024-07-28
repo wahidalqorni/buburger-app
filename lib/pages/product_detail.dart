@@ -202,7 +202,7 @@ class _ProductDetailState extends State<ProductDetail> {
             // Pesan Sekarang
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderNowPage(nama: widget.dataProduct.namaProduct, imageUrl: widget.dataProduct.gambar, harga: widget.dataProduct.harga, qty: jumlah.toString()) ));
+               cartC.postCartNow(widget.dataProduct.id.toString(), widget.dataProduct, jumlah.toString());
               },
               child: Container(
                 width: 150,

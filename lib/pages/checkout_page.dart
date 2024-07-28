@@ -1,15 +1,18 @@
+import 'package:buburger_app/controllers/cart_controller.dart';
+import 'package:buburger_app/controllers/checkout_controller.dart';
 import 'package:buburger_app/pages/proses_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../config/config.dart';
 import '../themes/themes.dart';
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({super.key, required this.namaLengkap, required this.nohp, required this.alamat, required this.metodePembayaran, required this.nama, required this.harga, required this.qty, required this.imageUrl});
+  const CheckoutPage({super.key, required this.namaLengkap, required this.nohp, required this.alamat, required this.metodePembayaran, required this.nama, required this.harga, required this.qty, required this.imageUrl, required this.idCart, required this.totalharga});
 
   // siaplan variabel penerima data dari halaman sebelumnya (order now page)
   // variabel penerima data detail pemesan
-  final String namaLengkap, nohp, alamat, metodePembayaran;
+  final String namaLengkap, nohp, alamat, metodePembayaran, idCart, totalharga;
 
   // variabel penerima data detail burger
   final String nama, harga, qty, imageUrl;
@@ -21,6 +24,8 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
+
+    final checkoutC = Get.put(CheckoutController());
 
     // variabel hitungannya
     int totHarga = int.parse(widget.harga) * int.parse(widget.qty);
@@ -55,7 +60,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             ),
             child: Row(
               children: [
-                Image.asset(widget.imageUrl, width: 105, height: 105, ),
+                Image.network(widget.imageUrl, width: 105, height: 105, ),
                 SizedBox(width: 21,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +211,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: primaryColor),
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProsesPage() ));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => ProsesPage() ));
+                checkoutC.postCheckoutbyId(widget.idCart, widget.namaLengkap, widget.nohp, widget.alamat, widget.metodePembayaran);
               },
               child: Padding(
                 padding: const EdgeInsets.only(

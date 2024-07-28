@@ -18,6 +18,8 @@ class AuthController extends GetxController {
   TextEditingController password = TextEditingController(text: SpUtil.getString("password") == "" ? "" : SpUtil.getString("password") );
   TextEditingController telepon = TextEditingController();
 
+  // variabel utk menampung loading
+  RxBool isLoading = false.obs;
 
   // function login
   Future login() async {
@@ -26,6 +28,8 @@ class AuthController extends GetxController {
 
     // buat prosesnya
     try {
+      // loading = true
+      isLoading.value = true;
       // fungsi utk mengirim data ke web service
       final response = await http.post(url, body: {
         'email' : email.text,
@@ -51,16 +55,17 @@ class AuthController extends GetxController {
         SpUtil.putString("nama_user", responseDecode["data"]["name"]);
         SpUtil.putString("email_user", responseDecode["data"]["email"]);
         SpUtil.putString("telepon_user", responseDecode["data"]["telepon"]);
-
+        isLoading.value = false;
         // arahkan ke halaman homepage
         Get.offAll(HomePage());
 
       } else {
         // Get.snackbar("Error", responseDecode["message"] == "Error Validation" ? errorValidation.toString() : responseDecode["message"] );
-
+        isLoading.value = false;
         Get.snackbar("Error", responseDecode["message"], backgroundColor: redColor, colorText: whiteColor, snackPosition: SnackPosition.TOP, margin: EdgeInsets.all(10)  );
       }
     } catch (e) {
+      isLoading.value = false;
       Get.snackbar("Error", e.toString(), backgroundColor: redColor, colorText: whiteColor, snackPosition: SnackPosition.TOP, margin: EdgeInsets.all(10) );
     }
   }

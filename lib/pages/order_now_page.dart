@@ -1,25 +1,24 @@
+import 'package:buburger_app/models/Product_model.dart';
 import 'package:buburger_app/pages/checkout_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../config/config.dart';
 
 class OrderNowPage extends StatefulWidget {
-  const OrderNowPage(
-      {super.key,
-      required this.nama,
-      required this.imageUrl,
-      required this.harga,
-      required this.qty});
+  const OrderNowPage({super.key, required this.dataProduct, required this.jumlahBeli, required this.idCart, required this.totalharga});
 
-  final String nama, imageUrl, harga, qty;
+  final String jumlahBeli;
+  final ProductModel dataProduct;
+  final int idCart;
+  final int totalharga;
 
   @override
   State<OrderNowPage> createState() => _OrderNowPageState();
 }
 
 class _OrderNowPageState extends State<OrderNowPage> {
-
   // variabel pilihan default metode pembayaran
   String metodePembayaran = "Cash On Delivery (COD)";
 
@@ -60,8 +59,8 @@ class _OrderNowPageState extends State<OrderNowPage> {
             child: Row(
               children: [
                 // image
-                Image.asset(
-                  widget.imageUrl,
+                Image.network(
+                  widget.dataProduct.gambar,
                   width: 105,
                   height: 105,
                 ),
@@ -73,17 +72,21 @@ class _OrderNowPageState extends State<OrderNowPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.nama,
+                      widget.dataProduct.namaProduct,
                       style: blackTextstyle.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      Config.convertToIdr(int.parse(widget.harga),0),
+                      Config.convertToIdr(int.parse(widget.dataProduct.harga), 0),
                       style: greyTextstyle,
                     ),
                     Text(
-                      "Qty : ${widget.qty}",
+                      "Qty : ${widget.jumlahBeli}",
+                      style: greyTextstyle,
+                    ),
+                    Text(
+                      Config.convertToIdr(int.parse(widget.totalharga.toString()), 0),
                       style: greyTextstyle,
                     ),
                   ],
@@ -104,7 +107,10 @@ class _OrderNowPageState extends State<OrderNowPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Detail Pemesanan", style: blackTextstyle, ),
+                  Text(
+                    "Detail Pemesanan",
+                    style: blackTextstyle,
+                  ),
                   Text(
                     "Nama Lengkap",
                     style: blackTextstyle.copyWith(
@@ -172,7 +178,7 @@ class _OrderNowPageState extends State<OrderNowPage> {
                   ),
                   TextFormField(
                     controller: alamat,
-                    keyboardType:TextInputType.multiline,
+                    keyboardType: TextInputType.multiline,
                     minLines: 6,
                     maxLines: 6,
                     decoration: InputDecoration(
@@ -192,57 +198,60 @@ class _OrderNowPageState extends State<OrderNowPage> {
               ),
             ),
           ),
-
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Container(
-            decoration: BoxDecoration(
-              color: whiteColor
-            ),
+            decoration: BoxDecoration(color: whiteColor),
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Metode Pembayaran", style: blackTextstyle, ),
+                  Text(
+                    "Metode Pembayaran",
+                    style: blackTextstyle,
+                  ),
                   DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: greyColor, width: 2.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: greyColor,
-                          ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: greyColor, width: 2.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 3,
+                          color: greyColor,
                         ),
                       ),
-                      value: metodePembayaran,
-                      items: <String>['Cash On Delivery (COD)', 'Transfer Bank']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: blackTextstyle,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          metodePembayaran = newValue!;
-                        });
-                      },
                     ),
+                    value: metodePembayaran,
+                    items: <String>['Cash On Delivery (COD)', 'Transfer Bank']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: blackTextstyle,
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        metodePembayaran = newValue!;
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
-
-    bottomNavigationBar: Container(
+      bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
         color: whiteColor,
@@ -252,8 +261,8 @@ class _OrderNowPageState extends State<OrderNowPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: primaryColor),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutPage(namaLengkap: namaLengkap.text, nohp: nohp.text, alamat: alamat.text, metodePembayaran: metodePembayaran, nama: widget.nama, harga: widget.harga, qty: widget.qty, imageUrl: widget.imageUrl) ));
+              onPressed: () {
+                Get.to(CheckoutPage(namaLengkap: namaLengkap.text, nohp: nohp.text, alamat: alamat.text, metodePembayaran: metodePembayaran, nama: widget.dataProduct.namaProduct, harga: widget.dataProduct.harga, qty: widget.jumlahBeli, imageUrl: widget.dataProduct.gambar, idCart: widget.idCart.toString(), totalharga: widget.totalharga.toString(), ));
               },
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -270,7 +279,7 @@ class _OrderNowPageState extends State<OrderNowPage> {
             ),
           ),
         ),
-      ),  
+      ),
     );
   }
 }

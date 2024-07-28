@@ -9,7 +9,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // buat variabel utk memanggil auth_controller yg sdh dibuat
     final authC = Get.put(AuthController());
 
@@ -116,18 +115,23 @@ class LoginPage extends StatelessWidget {
             ),
 
             // button
-            Container(
-              height: 45,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: primaryColor,
-                ),
-                onPressed: (){
-                  authC.login();
-                },
-                child: Text("Masuk", style: blackTextstyle, ),
-              ),
-            ),
+            Obx(() => Container(
+                  height: 45,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: primaryColor,
+                    ),
+                    onPressed: () {
+                      authC.login();
+                    },
+                    child: authC.isLoading == true ? CircularProgressIndicator(
+                      color: whiteColor,
+                    ) :  Text(
+                      "Masuk",
+                      style: blackTextstyle,
+                    ),
+                  ),
+                )),
 
             // belum punya akun? ....
             SizedBox(
@@ -136,12 +140,21 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Belum punya akun?", style: blackTextstyle,),
+                Text(
+                  "Belum punya akun?",
+                  style: blackTextstyle,
+                ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => DaftarPage() ));
-                  },
-                  child: Text(" Daftar", style: secodaryTextstyle, )),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DaftarPage()));
+                    },
+                    child: Text(
+                      " Daftar",
+                      style: secodaryTextstyle,
+                    )),
               ],
             ),
           ],
