@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 class Config {
 
   // sediakan variabel penampung alamat url web service
-  static String urlAPI = "https://syntop.airportslab.com/api";
+  static String urlAPI = "https://syntop.poltekbangplg.ac.id/api";
   // sedaiakan variabel penampung alamat url main website (digunakan untuk ambil path file/gambar dr backend)
-  static String urlMain = "https://syntop.airportslab.com/";
+  static String urlMain = "https://syntop.poltekbangplg.ac.id/";
 
   // variabel end point yg akan dipakai
   // login, register, logout
