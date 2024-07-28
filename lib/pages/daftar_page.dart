@@ -9,7 +9,6 @@ class DaftarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final authC = Get.put(AuthController());
 
     return Scaffold(
@@ -157,27 +156,28 @@ class DaftarPage extends StatelessWidget {
               ),
             ),
 
-           
             SizedBox(
               height: 60,
             ),
 
             // button
-            Container(
-              height: 45,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: primaryColor,
-                ),
-                onPressed: (){
-                  authC.register();
-                },
-                child: Text(
-                  "Buat Akun",
-                  style: blackTextstyle,
-                ),
-              ),
-            ),
+            Obx(() => Container(
+                  height: 45,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: primaryColor,
+                    ),
+                    onPressed: () {
+                      authC.register();
+                    },
+                    child: authC.isLoading == true ? CircularProgressIndicator(
+                      color: whiteColor,
+                    )  :  Text(
+                      "Buat Akun",
+                      style: blackTextstyle,
+                    ),
+                  ),
+                )),
 
             // belum punya akun? ....
             SizedBox(
@@ -192,7 +192,8 @@ class DaftarPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage() ));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                   child: Text(
                     " Masuk",
