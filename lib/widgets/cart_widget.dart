@@ -1,11 +1,16 @@
 import 'package:buburger_app/models/Cart_model.dart';
+import 'package:buburger_app/pages/shop_now_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../config/config.dart';
 
 class CartWidget extends StatefulWidget {
-  CartWidget({super.key, required this.dataCart, });
+  CartWidget({
+    super.key,
+    required this.dataCart,
+  });
 
   final CartModel dataCart;
 
@@ -27,7 +32,7 @@ class _CartWidgetState extends State<CartWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.network(
-           widget.dataCart.gambar,
+            widget.dataCart.gambar,
             width: 150,
             height: 150,
           ),
@@ -44,7 +49,7 @@ class _CartWidgetState extends State<CartWidget> {
                 ),
               ),
               Text(
-                Config.convertToIdr(int.parse(widget.dataCart.totalharga),0),
+                Config.convertToIdr(int.parse(widget.dataCart.totalharga), 0),
                 style: greyTextstyle,
               ),
               Row(
@@ -83,7 +88,13 @@ class _CartWidgetState extends State<CartWidget> {
                   style: TextButton.styleFrom(
                     backgroundColor: primaryColor,
                   ),
-                  onPressed: null,
+                  onPressed: () {
+                    Get.to(ShopNowPage(
+                        jumlahBeli: widget.dataCart.jumlah,
+                        dataOrder: widget.dataCart,
+                        idCart: int.parse(widget.dataCart.id),
+                        totalharga: int.parse(widget.dataCart.totalharga)));
+                  },
                   child: Text("Pesan"),
                 ),
               ),

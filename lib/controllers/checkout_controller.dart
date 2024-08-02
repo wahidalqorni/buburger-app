@@ -26,7 +26,7 @@ class CheckoutController extends GetxController {
       } );
 
       var responseDecode = json.decode(response.body);
-
+      print(responseDecode);
       if(response.statusCode == 200) {
         Get.snackbar("Success", responseDecode["message"]);
         //  kembalikan ke halaman HomePage
@@ -36,6 +36,7 @@ class CheckoutController extends GetxController {
       }
 
     } catch (e) {
+      
       Get.snackbar("Failed", e.toString(), backgroundColor: primaryColor, colorText: whiteColor );
     }
   }

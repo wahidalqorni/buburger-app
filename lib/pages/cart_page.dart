@@ -27,11 +27,9 @@ class CartPage extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-
             FutureBuilder<List<CartModel>>(
               future: CartServices.getCartList(),
               builder: (context, snapshot) {
-
                 // saat loading...
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   // tampilkan widget CircularProgressIndicator
@@ -45,9 +43,11 @@ class CartPage extends StatelessWidget {
                 } else if (snapshot.hasData) {
                   return Column(
                     children: [
-                       ...snapshot.data!.map((data) { 
-                          return CartWidget(dataCart: data,);
-                        })
+                      ...snapshot.data!.map((data) {
+                        return CartWidget(
+                          dataCart: data,
+                        );
+                      })
                     ],
                   );
                 }
@@ -55,9 +55,7 @@ class CartPage extends StatelessWidget {
                 // defautl agar future builder bisa berfungsi
                 return Container();
               },
-              
-              ),
-
+            ),
           ],
         ),
       ),

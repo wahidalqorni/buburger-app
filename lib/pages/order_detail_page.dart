@@ -33,7 +33,7 @@ class OrderDetailPage extends StatelessWidget {
         margin: EdgeInsets.only(top: 37),
         child: ListView(
           children: [
-            OrderWidget(nama: nama, harga: harga, imageUrl: imageUrl, qty: qty, status: status),
+            // OrderWidget(nama: nama, harga: harga, imageUrl: imageUrl, qty: qty, status: status),
             SizedBox(height: 10,),
 
             // status widget

@@ -1,3 +1,4 @@
+import 'package:buburger_app/models/Checkout_model.dart';
 import 'package:buburger_app/pages/order_detail_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -5,22 +6,15 @@ import 'package:flutter/material.dart';
 import '../config/config.dart';
 
 class OrderWidget extends StatelessWidget {
-  OrderWidget({super.key, required this.nama, required this.harga, required this.imageUrl, required this.qty, required this.status });
+  OrderWidget({super.key, required this.checkoutModel });
 
-  String nama, harga, imageUrl, qty, status;
-
+  final CheckoutModel checkoutModel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailPage(
-          nama: nama,
-          harga: harga,
-          imageUrl: imageUrl,
-          qty: qty,
-          status: status,
-        ) ));
+        
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 15),
@@ -32,18 +26,24 @@ class OrderWidget extends StatelessWidget {
         child: Row(
           children: [
             // image
-            Image.asset(imageUrl, width: 105, height: 105, ),
+            Image.network(checkoutModel.item.gambar, width: 105, height: 105, ),
             SizedBox(width: 21,),
             // column
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(nama, style: blackTextstyle.copyWith(
+                Text('Kode : ' + checkoutModel.kodeTransaksi ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.55,
+                  child: Text(checkoutModel.item.namaProduct, style: blackTextstyle.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ), ),
+                ),
+                Text(Config.convertToIdr(int.parse(checkoutModel.grandTotal), 0), style: greyTextstyle, ),
+                Text("Qty : ${checkoutModel.item.jumlah}", style: greyTextstyle, ),
+                Text(checkoutModel.status == "0" ? 'Baru' : checkoutModel.status == "1" ? "Diproses" : "Selesai" , style: checkoutModel.status == "0" ?  primaryTextstyle.copyWith(
                   fontWeight: FontWeight.w600,
-                ), ),
-                Text(Config.convertToIdr(int.parse(harga),0), style: greyTextstyle, ),
-                Text("Qty : ${qty}", style: greyTextstyle, ),
-                Text(status, style: status == "Diproses" ?  primaryTextstyle.copyWith(
+                ) : checkoutModel.status == "1" ? greyTextstyle.copyWith(
                   fontWeight: FontWeight.w600,
                 ) : greenTextstyle.copyWith(
                   fontWeight: FontWeight.w600,
