@@ -2,6 +2,7 @@ import 'package:buburger_app/models/Checkout_model.dart';
 import 'package:buburger_app/pages/order_detail_page.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../config/config.dart';
 
@@ -14,7 +15,7 @@ class OrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        
+        Get.to(OrderDetailPage(dataOrder: checkoutModel));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 15),
