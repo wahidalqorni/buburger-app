@@ -7,6 +7,8 @@ class Config {
   // sedaiakan variabel penampung alamat url main website (digunakan untuk ambil path file/gambar dr backend)
   static String urlMain = "https://syntop.poltekbangplg.ac.id/";
 
+  String movieUrl = "https://api.themoviedb.org/3/discover/movie?api_key=8b5d575fbdb689dd6874a773130696b4&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate";
+
   // variabel end point yg akan dipakai
   // login, register, logout
   String urlLogin = "$urlAPI/login";
