@@ -86,13 +86,14 @@ class CheckoutController extends GetxController {
       var responseDecode = jsonDecode(response.body);
 
       if(responseDecode["success"] == true){
-        Get.snackbar("Success", responseDecode["message"]);
+        Get.snackbar("Success", responseDecode["message"], backgroundColor: greenColor, colorText: whiteColor);
+        Get.off(HomePage());
       } else {
-        Get.snackbar("Failed", responseDecode["message"]);
+        Get.snackbar("Failed", responseDecode["message"], backgroundColor: redColor, colorText: whiteColor );
       }
 
     } catch (e) {
-      Get.snackbar("Failed", e.toString());
+      Get.snackbar("Failed", e.toString(), backgroundColor: redColor, colorText: whiteColor);
     }
   }
 

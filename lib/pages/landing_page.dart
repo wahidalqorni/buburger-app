@@ -1,14 +1,19 @@
 import 'package:buburger_app/models/Product_model.dart';
+import 'package:buburger_app/pages/search_page.dart';
 import 'package:buburger_app/services/product_services.dart';
 import 'package:buburger_app/themes/themes.dart';
 import 'package:buburger_app/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController keyword = TextEditingController();
+
     return Scaffold(
       backgroundColor: bgColor,
       body: Container(
@@ -21,9 +26,12 @@ class LandingPage extends StatelessWidget {
           children: [
             // kolom search
             TextFormField(
+              controller: keyword,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
-                  onPressed: null,
+                  onPressed: (){
+                    Get.to(SearchPage(keyword: keyword.text));
+                  },
                   icon: Icon(Icons.search),
                 ),
                 enabledBorder: OutlineInputBorder(

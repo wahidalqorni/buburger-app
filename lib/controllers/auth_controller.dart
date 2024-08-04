@@ -39,6 +39,7 @@ class AuthController extends GetxController {
         'password': password.text,
       });
 
+      // simpan inputan ke memori device
       SpUtil.putString("password", password.text);
       SpUtil.putString("email", email.text);
       //print hasil dari variabel response di atas
